@@ -1,6 +1,6 @@
 {
-    "printWidth": 80,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "plugins": ["prettier-plugin-stylus"]
+  "printWidth": 80,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "plugins": ["prettier-plugin-stylus"]
 }

@@ -18,7 +18,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@services/*": ["src/services/*"] // 映射 "@services" 到 "src/services" 目录
+    }
   },
   "include": ["src"],
   "references": [
