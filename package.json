@@ -11,8 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "antd-mobile": "^5.36.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -23,6 +25,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "prettier": "^3.3.2",
+    "prettier-plugin-stylus": "^0.1.0",
     "stylus": "^0.63.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.13"
