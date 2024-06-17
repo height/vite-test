@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const baseUrl = 'http://koa.web-koa.1666126356105365.cn-chengdu.fc.devsapp.net';
 
-export interface IParams {
+interface IParams<T = any> {
   url: string;
   method: 'POST' | 'GET';
-  data?: { [key: string]: any };
+  data?: { [key: string]: T };
   headers?: { [key: string]: any };
 }
 
