@@ -1,6 +1,8 @@
 import { NavBar } from 'antd-mobile';
 import { Form, Input, Button } from 'antd-mobile';
 import Login from './login';
+import Apply from './apply';
+import Applying from './applying';
 
 export default function Titles() {
   const onFinish = (values: any) => {
@@ -16,7 +18,10 @@ export default function Titles() {
       <NavBar style={{ background: '#fff' }} back={null}>
         头衔申请
       </NavBar>
-      <Login onLogged={onLogged} />
+      {/* <Apply /> */}
+      <Applying />
+
+      {/* <Login onLogged={onLogged} /> */}
     </div>
   );
 }
