@@ -3,10 +3,6 @@ import { Form, Input, Button } from 'antd-mobile';
 import Login from './login';
 
 export default function Titles() {
-  const onFinish = (values: any) => {
-    console.log(values);
-  };
-
   const onLogged = () => {
     console.log('已登录');
   };

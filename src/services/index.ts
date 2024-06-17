@@ -6,5 +6,5 @@ interface ILoginParams {
   sessionId?: string;
 }
 export function loginRequest(params: ILoginParams) {
-  postFetch('/title-grant/check-kingdom', params);
+  return postFetch('/title-grant/check-kingdom', params);
 }

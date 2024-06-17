@@ -1,19 +1,18 @@
 import axios from 'axios';
 
-const baseUrl =
-  'https://koa.web-koa.1666126356105365.cn-chengdu.fc.devsapp.net';
+const baseUrl = 'http://koa.web-koa.1666126356105365.cn-chengdu.fc.devsapp.net';
 
-interface IParams {
+export interface IParams {
   url: string;
   method: 'POST' | 'GET';
   data?: { [key: string]: any };
   headers?: { [key: string]: any };
 }
 
-interface IResponse {
+export interface IResponse {
   success: boolean;
-  data?: any;
-  error?: any;
+  resolve?: any;
+  reject?: any;
 }
 
 export const request = async (params: IParams): Promise<IResponse> => {
@@ -31,21 +30,21 @@ export const request = async (params: IParams): Promise<IResponse> => {
       params: method === 'GET' ? data : undefined,
     });
 
-    if (response.status === 200) {
+    if (response.status === 200 && response?.data?.success === true) {
       return {
         success: true,
-        data: response.data,
+        resolve: response.data,
       };
     } else {
       return {
         success: false,
-        error: response.data,
+        reject: response.data,
       };
     }
   } catch (error) {
     return {
       success: false,
-      error: error,
+      reject: error,
     };
   }
 };

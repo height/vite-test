@@ -1,23 +1,35 @@
 import { NavBar } from 'antd-mobile';
 import { Form, Input, Button } from 'antd-mobile';
 import { loginRequest } from '../../services';
+import { getCache } from '../../utils/cache';
+import { generateRandomStr } from '../../utils/str';
+import { useEffect } from 'react';
+import { useBeforeMount } from '../../hooks';
 
 interface IProps {
   onLogged: () => void;
 }
 export default function Login(props: IProps) {
-  const onFinish = (values: any) => {
-    console.log(values);
+  const [form] = Form.useForm();
+  const onFinish = async (values: any) => {
+    const { name = '', pwd = '' } = values || {};
+    const sessionId =
+      getCache('titles.sessionId') || `${name}-${generateRandomStr(8)}`;
 
-    loginRequest({
-      mapCode: values?.name,
-      applyPWD: values?.pwd,
+    const re = await loginRequest({
+      mapCode: name,
+      applyPWD: pwd,
+      sessionId,
     });
+    console.log(re);
   };
+
+  useBeforeMount(() => {});
 
   return (
     <div className="content" style={{ marginTop: 200 }}>
       <Form
+        form={form}
         layout="horizontal"
         mode="card"
         onFinish={onFinish}
