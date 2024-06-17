@@ -12,6 +12,7 @@ import { AddSquareOutline, SetOutline } from 'antd-mobile-icons';
 
 import './App.styl';
 
+
 const tabs = [
   {
     key: '/',
