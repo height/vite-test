@@ -1,16 +1,19 @@
 import { NavBar } from 'antd-mobile';
-import { Form, Input, Button } from 'antd-mobile';
+import { Form, Input, Button, Toast } from 'antd-mobile';
 import { loginRequest } from '../../services';
-import { getCache } from '../../utils/cache';
+import { getCache, setCache } from '../../utils/cache';
 import { generateRandomStr } from '../../utils/str';
 import { useEffect } from 'react';
 import { useBeforeMount } from '../../hooks';
 
 interface IProps {
-  onLogged: () => void;
+  onLogged: (re: any) => void;
+  onFailed: () => void;
 }
 export default function Login(props: IProps) {
+  const { onLogged } = props;
   const [form] = Form.useForm();
+
   const onFinish = async (values: any) => {
     const { name = '', pwd = '' } = values || {};
     const sessionId =
@@ -21,10 +24,30 @@ export default function Login(props: IProps) {
       applyPWD: pwd,
       sessionId,
     });
+
+    if (re.resolve?.success === true) {
+      Toast.show('登录成功');
+      setCache('titles.sessionId', sessionId, 1);
+      setCache('titles.name', name);
+      setCache('titles.pwd', pwd);
+
+      // 判断登录成功
+      if (re.resolve?.success && re.resolve?.data) {
+        onLogged(re.resolve?.data);
+      }
+      return;
+    }
+
+    Toast.show(re.resolve?.message || '登录失败，请稍后重试');
     console.log(re);
   };
 
-  useBeforeMount(() => {});
+  useEffect(() => {
+    const _name = getCache('titles.name');
+    const _pwd = getCache('titles.pwd');
+    _name && form.setFieldValue('name', _name);
+    _pwd && form.setFieldValue('pwd', _pwd);
+  }, []);
 
   return (
     <div className="content" style={{ marginTop: 200 }}>

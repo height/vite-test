@@ -12,7 +12,6 @@ import { AddSquareOutline, SetOutline } from 'antd-mobile-icons';
 
 import './App.styl';
 
-
 const tabs = [
   {
     key: '/',
@@ -40,8 +39,8 @@ function AppContent() {
       <div id="content">
         <SafeArea style={{ background: '#fff' }} position="top" />
         <Routes>
-          <Route path="/" element={<Titles />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route key="Titles" path="/" element={<Titles />} />
+          <Route key="Settings" path="/settings" element={<Settings />} />
         </Routes>
       </div>
       <div id="tab-bar">

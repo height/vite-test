@@ -1,13 +1,30 @@
 import { Form, Input, Button, Selector, Space } from 'antd-mobile';
-import { loginRequest } from '../../services';
+import { applyingRequest, loginRequest } from '../../services';
 import styles from './index.module.styl';
+import { useEffect } from 'react';
+import { useBeforeMount, useCache } from '../../hooks';
 
-interface IProps {}
+interface IProps {
+  data: any;
+}
 
 export default function Applying(props: IProps) {
+  const [sessionId, setSessionId] = useCache('titles.sessionId', '');
+  const [mapCode, setMapCode] = useCache('titles.name', '');
+  const { data } = props;
+  const {} = data || {};
   const onFinish = (values: any) => {
     console.log(values);
   };
+
+  useBeforeMount(async () => {
+    const res = await applyingRequest({
+      sessionId,
+      mapCode,
+    });
+
+    console.log(res);
+  });
 
   return (
     <div className={styles.applying}>

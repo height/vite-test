@@ -9,13 +9,15 @@ interface IParams<T = any> {
   headers?: { [key: string]: any };
 }
 
-export interface IResponse {
+export interface IResponse<T = { [key: string]: any }> {
   success: boolean;
-  resolve?: any;
+  resolve?: T;
   reject?: any;
 }
 
-export const request = async (params: IParams): Promise<IResponse> => {
+export const request = async <T = any>(
+  params: IParams,
+): Promise<IResponse<T>> => {
   const { url, method = 'GET', data = {}, headers = {} } = params;
 
   try {
@@ -30,7 +32,7 @@ export const request = async (params: IParams): Promise<IResponse> => {
       params: method === 'GET' ? data : undefined,
     });
 
-    if (response.status === 200 && response?.data?.success === true) {
+    if (response.status === 200) {
       return {
         success: true,
         resolve: response.data,
@@ -60,8 +62,8 @@ export const getFetch = (url: string, data = {}, headers = {}) => {
 };
 
 // 封装POST请求
-export const postFetch = (url: string, data = {}, headers = {}) => {
-  return request({
+export const postFetch = <T = any>(url: string, data = {}, headers = {}) => {
+  return request<T>({
     url,
     method: 'POST',
     data,
